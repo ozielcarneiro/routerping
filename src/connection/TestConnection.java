@@ -21,37 +21,49 @@ import java.util.logging.Logger;
  */
 public class TestConnection {
     
-    public boolean testConnection(String ip){
+    public static boolean testConnection(String ip){
         URL ipRouter;
         try {
             ipRouter = new URL("http://" + ip);
+            URLConnection conn = ipRouter.openConnection();
+            conn.setConnectTimeout(2000);
+            conn.connect();
+            return true;
         } catch (MalformedURLException ex) {
             Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (SocketTimeoutException ex){
+            return false;
+        } catch (IOException ex) {
+            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return true;
     }
     
     public static void main(String[] args) {
-        try {
-            URL ipRouter = new URL("http://10.125.136.166");
-            URLConnection conn = ipRouter.openConnection();
-            //BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            conn.setConnectTimeout(10000);
-            conn.connect();
-            String line;
-            //while((line = br.readLine())!=null){
-            //    System.out.println(line);
-            //}
-            
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-        } catch (SocketTimeoutException ex){
-            System.out.println("Connection Timeout");
-        }catch (IOException ex) {
-            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-        }
+        String ipRouter = "10.125.136.135";
+        System.out.println(testConnection(ipRouter));
+//        try {
+//            URL urlRouter = new URL("http://"+ipRouter);
+//            URLConnection conn = urlRouter.openConnection();
+//            //BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//            conn.setConnectTimeout(2000);
+//            conn.connect();
+//            System.out.println(ipRouter+" está ativo!");
+//            String line;
+//            //while((line = br.readLine())!=null){
+//            //    System.out.println(line);
+//            //}
+//            
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
+//            ex.printStackTrace();
+//        } catch (SocketTimeoutException ex){
+//            System.out.println(ipRouter+" não está ativo!");
+//        }catch (IOException ex) {
+//            Logger.getLogger(TestConnection.class.getName()).log(Level.SEVERE, null, ex);
+//            ex.printStackTrace();
+//        }
     }
     
 }

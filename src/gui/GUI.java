@@ -5,11 +5,15 @@
  */
 package gui;
 
+import connection.TestConnection;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -24,14 +28,6 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void paintRouters(){
-        Graphics2D g2d = (Graphics2D) jPanel1.getGraphics();
-        g2d.setColor(Color.red);
-        g2d.fillOval(10, 10, 30, 30);
-        g2d.setColor(Color.black);
-        g2d.drawString("1022", 10, 45);
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,39 +38,120 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(160, 0), new java.awt.Dimension(160, 0), new java.awt.Dimension(160, 32767));
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"2°", null, null, null, null, null, null, null, null, null, null},
+                {"3°", null, null, null, null, null, null, null, null, null, null},
+                {"4°", null, null, null, null, null, null, null, null, null, null},
+                {"5°", null, null, null, null, null, null, null, null, null, null},
+                {"6°", null, null, null, null, null, null, null, null, null, null},
+                {"7°", null, null, null, null, null, null, null, null, null, null},
+                {"8°", null, null, null, null, null, null, null, null, null, null},
+                {"9°", null, null, null, null, null, null, null, null, null, null},
+                {"10°", null, null, null, null, null, null, null, null, null, null},
+                {"11°", null, null, null, null, null, null, null, null, null, null},
+                {"12°", null, null, null, null, null, null, null, null, null, null},
+                {"13°", null, null, null, null, null, null, null, null, null, null},
+                {"14°", null, null, null, null, null, null, null, null, null, null},
+                {"15°", null, null, null, null, null, null, null, null, null, null},
+                {"16°", null, null, null, null, null, null, null, null, null, null},
+                {"Presidencial", null, null, null, null, null, null, null, null, null, null},
+                {"Extras", null, null, null, null, null, null, null, null, null, null},
+                {"Lobby", null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Andar", "Apto 01", "Apto 03", "Apto 06", "Apto 09", "Apto 11", "Apto 13", "Apto 16", "Apto 19", "Apto 22", "Apto 25"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jScrollPane1.setViewportView(jPanel1);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setGridColor(new java.awt.Color(0, 0, 0));
+        jTable1.setMaximumSize(new java.awt.Dimension(2147483647, 256));
+        jTable1.setMinimumSize(new java.awt.Dimension(600, 256));
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(105);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setResizable(false);
+            jTable1.getColumnModel().getColumn(9).setResizable(false);
+            jTable1.getColumnModel().getColumn(10).setResizable(false);
+        }
+
+        jButton1.setText("Rechecar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel1))
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        checkConnections();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,15 +169,11 @@ public class GUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -108,14 +181,68 @@ public class GUI extends javax.swing.JFrame {
             public void run() {
                 GUI g = new GUI();
                 g.setVisible(true);
-                g.paintRouters();
-                
+                g.jTable1.setShowGrid(true);
+                MyRenderer rend = new MyRenderer();
+                g.jTable1.setDefaultRenderer(Object.class, rend);
+                g.checkConnections();
             }
-        });
+
+        }
+        );
+    }
+
+    public void checkConnections() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < ipTable.length; i++) {
+            for (int j = 0; j < ipTable[i].length; j++) {
+                if (ipTable[i][j] != 0) {
+                    boolean connected = TestConnection.testConnection("10.125.136." + ipTable[i][j]);
+                    if (connected) {
+                        jTable1.setValueAt("OK "+ipTable[i][j], i, j + 1);
+                    } else {
+                        jTable1.setValueAt("OFF "+ipTable[i][j], i, j + 1);
+                    }
+                } else {
+                    //jTable1.setValueAt("OFF "+ipTable[i][j], i, j + 1);
+                }
+//                            connected = TestConnection.testConnection("10.125.136.138");
+//                            if (connected) {
+//                                g.jTable1.setValueAt("Ativo", 5, 5);
+//                            } else {
+//                                g.jTable1.setValueAt("Inativo", 5, 5);
+//                            }
+            }
+
+        }
+        String date = Calendar.getInstance(TimeZone.getTimeZone("GMT-3:00"), Locale.forLanguageTag("pt-BR")).getTime().toString();
+        jLabel1.setText("Última Checagem: "+date);
+        System.out.println(System.currentTimeMillis() - start);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    private final int[][] ipTable = {{217, 218, 219, 220, 221, 222, 223, 224, 225, 226},
+    {84, 86, 88, 90, 101, 232, 130, 87, 85, 122},
+    {38, 94, 96, 99, 100, 98, 97, 95, 93, 124},
+    {102, 103, 104, 239, 106, 107, 105, 108, 111, 125},
+    {113, 115, 117, 120, 121, 119, 118, 116, 114, 112},
+    {139, 132, 134, 137, 138, 136, 135, 133, 131, 126},
+    {152, 154, 156, 159, 160, 158, 157, 155, 153, 127},
+    {143, 145, 147, 149, 150, 148, 144, 146, 142, 128},
+    {167, 169, 171, 173, 174, 172, 168, 170, 166, 129},
+    {178, 180, 182, 184, 185, 183, 179, 181, 177, 186},
+    {82, 77, 78, 80, 0, 79, 0, 81, 83, 0},
+    {75, 73, 71, 68, 67, 69, 70, 72, 74, 0},
+    {188, 190, 192, 194, 195, 193, 189, 191, 187, 196},
+    {198, 200, 202, 204, 205, 203, 199, 201, 197, 206},
+    {208, 210, 212, 214, 215, 213, 209, 211, 207, 216},
+    {0, 0, 0, 0, 0, 0, 0, 0, 232, 233},
+    {228, 229, 230, 0, 0, 0, 0, 0, 0, 0},
+    {234, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
 }
