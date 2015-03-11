@@ -8,13 +8,12 @@ package gui;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
-
+import javax.swing.table.DefaultTableCellRenderer;
 /**
  *
  * @author admin
  */
-public class MyRenderer extends DefaultTableCellHeaderRenderer {
+public class MyRenderer extends DefaultTableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
